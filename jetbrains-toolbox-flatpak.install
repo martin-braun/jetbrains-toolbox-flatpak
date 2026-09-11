@@ -1,0 +1,21 @@
+pre_remove() {
+	user=${SUDO_USER:-${DOAS_USER:-}}
+
+	if [ -z "$user" ] || [ "$user" = root ]; then
+		return 0
+	fi
+
+	runuser -u "$user" -- sh -c '
+		applications="${XDG_DATA_HOME:-"$HOME/.local/share"}/applications"
+		desktop="$applications/com.jetbrains.Toolbox.desktop"
+
+		[ -L "$desktop" ] && rm -f "$desktop"
+
+		flatpak uninstall \
+			--user \
+			--assumeyes \
+			--noninteractive \
+			com.jetbrains.Toolbox \
+			>/dev/null 2>&1 || :
+	'
+}

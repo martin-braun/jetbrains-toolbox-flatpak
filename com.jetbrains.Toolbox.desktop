@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=JetBrains Toolbox
+Comment=Essential tools for software developers and teams
+Exec=/usr/bin/jetbrains-toolbox %U
+Icon=com.jetbrains.Toolbox
+Type=Application
+Categories=Development;IDE;
+StartupWMClass=jetbrains-toolbox
+MimeType=x-scheme-handler/jetbrains;
+X-Flatpak=com.jetbrains.Toolbox
+

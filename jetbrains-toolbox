@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+
+app='com.jetbrains.Toolbox'
+dir='/usr/share/jetbrains-toolbox-flatpak'
+bundle="$dir/com.jetbrains.Toolbox.flatpak"
+desktop='/usr/share/applications/com.jetbrains.Toolbox.desktop'
+bootstrap_version=$(cat "$dir/version")
+
+if output=$(flatpak --user run "$app" --version 2> /dev/null); then
+	installed_version=$(
+		printf '%s\n' "$output" \
+			| sed -n 's/^Toolbox \([0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*\).*/\1/p'
+	)
+	if [ "$installed_version" != "$bootstrap_version" ]; then
+		flatpak install \
+			--user \
+			--assumeyes \
+			--noninteractive \
+			--reinstall \
+			"$bundle" \
+			|| exit
+	fi
+else
+	flatpak install \
+		--user \
+		--assumeyes \
+		--noninteractive \
+		"$bundle" \
+		|| exit
+fi
+
+applications="${XDG_DATA_HOME:-"$HOME/.local/share"}/applications"
+mkdir -p "$applications" || exit
+ln -sf "$desktop" "$applications/com.jetbrains.Toolbox.desktop" || exit
+
+exec flatpak --user run "$app" "$@"
