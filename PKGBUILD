@@ -3,7 +3,7 @@
 # Contributors: JetBrains s.r.o.
 
 pkgname=jetbrains-toolbox-flatpak
-pkgver=3.9
+pkgver=3.9.1
 pkgrel=1
 
 pkgdesc='JetBrains Toolbox for Linux in Flatpak format'
@@ -37,7 +37,7 @@ noextract=(
     "${_flatpak}"
 )
 
-sha256sums=('a21d6561db294a5e8b736ed81479ff97b6a62aef4efa7485aed0516c125b1ac6'
+sha256sums=('04bd7b44b8ad1ccd708e02926419a2639b9d3c738f8b863413f02bc2b3bca6c0'
             '37cd9a5534ea2c807967f124ce31457dd6f1cc05e4d61e7e3694dd7876017d68'
             '59ccb287ef3c792d35b43ec921f6ea315bf56edc14695b5f794b36feab022a8a')
 
